@@ -1,4 +1,4 @@
-#include <cstdint>
+#include "minimal.cuh"
 
 extern __global__ void calculateSum( uint64_t const n,
                      double const* __restrict__ a,

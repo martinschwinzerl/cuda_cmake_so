@@ -1,10 +1,16 @@
-#include "impl/call_minimal_cpu.h"
+#include "call_minimal_cpu.h"
 
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
+
+extern void call_minimal_cpu( 
+    double const* __restrict__ a_begin, 
+    double const* __restrict__ a_end, 
+    double const* __restrict__ b_begin, 
+    double* __restrict__ c_begin );
 
 void call_minimal_cpu( 
     double const* __restrict__ a_it, 

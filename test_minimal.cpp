@@ -8,11 +8,8 @@
 #include <limits>
 #include <vector>
 
-#include <cuda_runtime_api.h>
-#include <cuda.h>
-
-#include "impl/call_minimal.h"
-#include "impl/call_minimal_cpu.h"
+#include "call_minimal_gpu.h"
+#include "call_minimal_cpu.h"
 
 int main()
 {
@@ -24,7 +21,7 @@ int main()
     std::vector< double > c_cpu( N, 0.0 );
     std::vector< double > c_gpu( N, 0.0 );
     
-    call_minimal( a.data(), a.data() + N, b.data(), c_gpu.data(), 64, 64 );
+    call_minimal_gpu( a.data(), a.data() + N, b.data(), c_gpu.data(), 64, 64 );
     call_minimal_cpu( a.data(), a.data() + N, b.data(), c_cpu.data() );
     
     double const tolerance = std::numeric_limits< double >::epsilon();

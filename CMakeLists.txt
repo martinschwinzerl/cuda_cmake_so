@@ -9,7 +9,7 @@ project( sixtracklib LANGUAGES C CXX )
 # ----- CPU only part -> OBJECT library libcuda_test_cpu_part
 
 set( CUDA_TEST_CPU_PART_HEADERS
-     impl/call_minimal_cpu.h
+     call_minimal_cpu.h
 )
 
 set( CUDA_TEST_CPU_PART_SOURCES
@@ -27,19 +27,19 @@ set_target_properties( cuda_test_cpu_part PROPERTIES CXX_STANDARD 11 )
 set_target_properties( cuda_test_cpu_part PROPERTIES CXX_STANDARD_REQUIRED ON )
 target_include_directories( cuda_test_cpu_part PUBLIC ${CMAKE_SOURCE_DIR} )
 
-# ----- CPU part with cuda:
+# ----- GPU part with cuda:
 
 # set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH} )
 find_package( CUDA REQUIRED )
 
 set( CUDA_TEST_GPU_PART_LIB_HEADERS 
-    impl/minimal.cuh
-    impl/call_minimal.h     
+    minimal.cuh
+    call_minimal_gpu.h     
 )
 
 set( CUDA_TEST_GPU_PART_LIB_SOURCES
      details/minimal.cu
-     details/call_minimal.cu
+     details/call_minimal_gpu.cu
 )
 
 set( CUDA_USE_STATIC_CUDA_RUNTIME OFF )
@@ -93,8 +93,6 @@ target_include_directories( cuda_test PUBLIC ${CMAKE_SOURCE_DIR} )
 # ===== use / test libcuda_test.so -> build executable program test_minimal
 
 cuda_add_executable( test_minimal test_minimal.cpp )
-
 target_link_libraries( test_minimal cuda_test )
-target_include_directories( test_minimal PUBLIC ${CMAKE_SOURCE_DIR} )
 
 
